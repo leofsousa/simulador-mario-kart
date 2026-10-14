@@ -1,0 +1,20 @@
+{
+  "name": "simulador-mario-kart",
+  "version": "1.0.0",
+  "description": "Projeto de aprendizado node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leofsousa/simulador-mario-kart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leofsousa/simulador-mario-kart/issues"
+  },
+  "homepage": "https://github.com/leofsousa/simulador-mario-kart#readme"
+}
