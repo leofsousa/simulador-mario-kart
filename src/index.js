@@ -99,10 +99,10 @@ async function playRaceEngine(character1, character2){
                 character1.PODER);
                  
             await logRollResult(
-                character1.NOME, 
+                character2.NOME, 
                 "poder", 
-                diceResult1, 
-                character1.PODER);
+                diceResult2, 
+                character2.PODER);
         }
 }
 }
