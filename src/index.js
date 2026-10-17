@@ -1,4 +1,4 @@
-const player1 = {
+const mario = {
     NOME: "Mário",
     VELOCIDADE: 4,
     MANOBRABILIDADE: 3,
@@ -6,13 +6,50 @@ const player1 = {
     PONTOS: 0,
 }
 
-const player2 = {
+const luigi = {
     NOME: "Luigi",
     VELOCIDADE: 3,
     MANOBRABILIDADE: 4,
     PODER: 4,
     PONTOS: 0,
 }
+
+const peach = {
+    NOME: "Peach",
+    VELOCIDADE: 3,
+    MANOBRABILIDADE: 4,
+    PODER: 2,
+    PONTOS: 0,
+}
+
+const yoshi = {
+    NOME: "Yoshi",
+    VELOCIDADE: 2,
+    MANOBRABILIDADE: 4,
+    PODER: 3,
+    PONTOS: 0,
+}
+
+const bowser = {
+    NOME: "Bowser",
+    VELOCIDADE: 5,
+    MANOBRABILIDADE: 2,
+    PODER: 5,
+    PONTOS: 0,
+}
+
+const dk = {
+    NOME: "Dowkey Kong",
+    VELOCIDADE: 2,
+    MANOBRABILIDADE: 2,
+    PODER: 5,
+    PONTOS: 0,
+}
+
+const player1 = mario;
+
+const player2 = luigi;
+    
 
 async function rollDice() {
     return Math.floor(Math.random() * 6) + 1;
@@ -91,6 +128,8 @@ async function playRaceEngine(character1, character2){
         if(block === "CONFRONTO"){
             let powerResult = diceResult1 + character1.PODER;
             let powerResult2 = diceResult2 + character2.PODER;
+            
+            console.log(`${character1.NOME} confrontou ${character2.NOME}`)
 
              await logRollResult(
                 character1.NOME, 
@@ -103,12 +142,80 @@ async function playRaceEngine(character1, character2){
                 "poder", 
                 diceResult2, 
                 character2.PODER);
+
+            const casco = {
+                NOME: "Casco de Tartaruga",
+                VALOR: 1,
+            };
+            const bomba = {
+                NOME: "Bomba",
+                VALOR: 2
+            };
+
+            let poder = {};
+            const sorteio = Math.random();
+            if (sorteio > 0.3){
+                poder = casco;
+            } else {
+                poder = bomba
+            }
+            const turbo = Math.random();
+            if (powerResult > powerResult2 ) {
+                if (character2.PONTOS > 0){
+                    character2.PONTOS -= poder.VALOR;
+                    character1.PONTOS < 0 ? character1.PONTOS = 0 : null;
+                }
+                console.log(poder === bomba ? "Booom  💣 💣 💣" : "🐢")
+                console.log(`${character1.NOME} encontrou ${poder.NOME} e venceu o confronto! ${character2.NOME} perdeu ${poder.VALOR} ponto(s).`)
+
+                
+                if (turbo > 0.7){
+                    character1.PONTOS++
+                    console.log(`${character1.NOME} ganhou um turbo por vencer!! +1 ponto`)
+                }
+            }
+            if (powerResult2 > powerResult ){
+                if(character1.PONTOS > 0){
+                    character1.PONTOS -= poder.VALOR;
+                    character1.PONTOS < 0 ? character1.PONTOS = 0 : null;
+                }
+                console.log(poder === bomba ? "Booom  💣 💣 💣" : "🐢")
+                console.log(`${character2.NOME} encontrou ${poder.NOME} e venceu o confronto! ${character1.NOME} perdeu ${poder.VALOR} ponto(s).`)
+                if (turbo > 0.7){
+                    character2.PONTOS++
+                    console.log(`${character2.NOME} ganhou um turbo por vencer!! +1 ponto`)
+                }
+            }
+                console.log(powerResult2 === powerResult ? "Empate no confronto! Nenhum ponto foi perdido." : "");
+            }
+
+        if(totalTestSkill1 > totalTestSkill2){
+            console.log(`${character1.NOME} venceu a rodada!`);
+            character1.PONTOS++;
+        } else if(totalTestSkill2 > totalTestSkill1) {
+            console.log(`${character2.NOME} venceu a rodada!`);
+            character2.PONTOS++;
         }
+        console.log("--------------------------");
+    }
 }
+
+async function declareWinner(character1, character2){
+    console.log("Resultado final:");
+    console.log(`${character1.NOME}: ${character1.PONTOS} pontos`);
+    console.log(`${character2.NOME}: ${character2.PONTOS} pontos`);
+    if(character1.PONTOS > character2.PONTOS)
+        console.log(`\n${character1.NOME} foi o vencedor!`)
+     else if (character2.PONTOS > character1.PONTOS)
+        console.log(`\n${character2.NOME} foi o vencedor!`)
+     else 
+        console.log("A corrida terminou em empate!")   
 }
+
 (async function main(){
     console.log(
         `🏁🚨Corrida entre ${player1.NOME} e ${player2.NOME} começando...`);
 
         await playRaceEngine(player1, player2);
+        await declareWinner(player1, player2);
 })();
