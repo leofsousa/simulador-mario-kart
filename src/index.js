@@ -163,7 +163,7 @@ async function playRaceEngine(character1, character2){
             if (powerResult > powerResult2 ) {
                 if (character2.PONTOS > 0){
                     character2.PONTOS -= poder.VALOR;
-                    character1.PONTOS < 0 ? character1.PONTOS = 0 : null;
+                    character2.PONTOS = Math.max(0, character2.PONTOS)
                 }
                 console.log(poder === bomba ? "Booom  💣 💣 💣" : "🐢")
                 console.log(`${character1.NOME} encontrou ${poder.NOME} e venceu o confronto! ${character2.NOME} perdeu ${poder.VALOR} ponto(s).`)
@@ -177,7 +177,7 @@ async function playRaceEngine(character1, character2){
             if (powerResult2 > powerResult ){
                 if(character1.PONTOS > 0){
                     character1.PONTOS -= poder.VALOR;
-                    character1.PONTOS < 0 ? character1.PONTOS = 0 : null;
+                    character1.PONTOS = Math.max(0, character1.PONTOS);
                 }
                 console.log(poder === bomba ? "Booom  💣 💣 💣" : "🐢")
                 console.log(`${character2.NOME} encontrou ${poder.NOME} e venceu o confronto! ${character1.NOME} perdeu ${poder.VALOR} ponto(s).`)
@@ -196,6 +196,7 @@ async function playRaceEngine(character1, character2){
             console.log(`${character2.NOME} venceu a rodada!`);
             character2.PONTOS++;
         }
+        console.log(`Pontuação parcial: ${character1.NOME}: ${character1.PONTOS} ponto(s) x ${character2.NOME}: ${character2.PONTOS} ponto(s)`)
         console.log("--------------------------");
     }
 }
